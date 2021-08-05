@@ -37,7 +37,6 @@ io.on('connection',socket => {
     let curr_room_id;
     let curr_name;
     socket.on('create',(room,name) => {
-        console.log(`A New Connection in ${room} by ${name}`);
         socket.join(room);
         curr_room_id = room;
         curr_name = name;
@@ -54,7 +53,6 @@ io.on('connection',socket => {
         socket.to(room).emit('user-joined',name);
     })
     socket.on('user-left-server',(room ,name)=> {
-        console.log(`A Cleanup in ${room} by ${name}`);
         socket.to(room).emit('user-left-client',name);
     })
     socket.on('disconnect',() => {
