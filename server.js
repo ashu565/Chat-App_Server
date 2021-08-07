@@ -36,6 +36,8 @@ const io = socketIo(server, {
   cors: {
     origin: [process.env.CLIENT],
     methods: ["GET", "POST", "DELETE"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true,
   },
 });
 
@@ -43,6 +45,7 @@ io.on("connection", (socket) => {
   let curr_room_id;
   let curr_name;
   socket.on("create", ({ room, name }) => {
+    console.log("hey", name);
     socket.join(room);
     curr_room_id = room;
     curr_name = name;
